@@ -1,0 +1,92 @@
+import java.util.Scanner;
+
+public class main {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+
+        String[] jenisKonversi = {
+            "Celsius ke Fahrenheit",
+            "Celsius ke Kelvin",
+            "Celsius ke Reamur",
+            "Fahrenheit ke Celsius",
+            "Kelvin ke Celsius",
+            "Reamur ke Celsius",
+            "Fahrenheit ke Kelvin",
+            "Fahrenheit ke Reamur",
+            "Kelvin ke Fahrenheit",
+            "Kelvin ke Reamur",
+            "Reamur ke Fahrenheit",
+            "Reamur ke Kelvin"
+        };
+
+        char lanjut;
+
+        do {
+            
+            System.out.println("Selamat datang di TempEasy!");
+            System.out.print("Masukkan besar derajat suhu: ");
+            double suhu = scanner.nextDouble();
+
+            System.out.println("\nPilih jenis konversi suhu:");
+            for (int i = 0; i < jenisKonversi.length; i++) {
+                System.out.println((i + 1) + ". " + jenisKonversi[i]);
+            }
+
+            System.out.print("\nMasukkan kode konversi (1-12): ");
+            int pilihan = scanner.nextInt();
+
+            double hasil = 0;
+            boolean valid = true;
+
+            hasil = konversiSuhu(pilihan, suhu);
+
+            if (pilihan < 1 || pilihan > 12) {
+                System.out.println("Kode konversi tidak valid!");
+                valid = false;
+            }
+
+            if (valid) {
+                System.out.println("Hasil konversi: " + hasil);
+            }
+
+            System.out.print("\nApakah ingin melakukan konversi lagi? (y/n): ");
+            lanjut = scanner.next().charAt(0);
+
+        } while (lanjut == 'y' || lanjut == 'Y'); 
+
+        System.out.println("Terima kasih telah menggunakan TempEasy!");
+        scanner.close();
+    }
+
+    public static double konversiSuhu(int pilihan, double suhu) {
+        switch (pilihan) {
+            case 1:
+                return (suhu * 9 / 5) + 32; 
+            case 2:
+                return suhu + 273.15;     
+            case 3:
+                return suhu * 4 / 5;      
+            case 4:
+                return (suhu - 32) * 5 / 9; 
+            case 5:
+                return suhu - 273.15;     
+            case 6:
+                return suhu * 5 / 4;      
+            case 7:
+                return (suhu - 32) * 5 / 9 + 273.15; 
+            case 8:
+                return (suhu - 32) * 4 / 9; 
+            case 9:
+                return (suhu - 273.15) * 9 / 5 + 32; 
+            case 10:
+                return (suhu - 273.15) * 4 / 5; 
+            case 11:
+                return (suhu * 9 / 4) + 32; 
+            case 12:
+                return (suhu * 5 / 4) + 273.15; 
+            default:
+                return 0; 
+        }
+    }
+}
